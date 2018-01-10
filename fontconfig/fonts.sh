@@ -1,0 +1,11 @@
+
+pacman -S ttf-dejavu wqy-zenhei ttf-liberation ttf-arphic-ukai ttf-arphic-uming
+
+
+for family in serif sans-serif monospace Arial Helvetica Verdana "Times New Roman" "Courier New"; do
+  echo -n "$family: "
+  fc-match "$family"
+done
+
+fc-cache -vf
+fc-match

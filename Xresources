@@ -1,0 +1,26 @@
+/*** Defines our theme ***/
+
+!#define FONT                      -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
+!#define FONT_BOLD                 -*-terminusmodx-bold-*-*-*-14-*-*-*-*-*-*-*
+!#define FONT_ITALIC               xft:Terminus (TTF):style=MediumItalic,pixelsize=14
+! good for c code.
+!#define FONT                      -*-proggytiny-*-*-*-*-*-*-*-*-*-*-*-*
+!#define FONT_BOLD                 -*-proggytiny-*-*-*-*-*-*-*-*-*-*-*-*
+!#define FONT                      -*-profont-*-*-*-*-11-*-*-*-*-*-*-*
+!#define FONT_BOLD                 -*-profont-*-*-*-*-11-*-*-*-*-*-*-*
+! Good  for c++ code - bold punctuation.
+!#define FONT                      -*-montecarlo-medium-*-*-*-*-*-*-*-*-*-*-*
+!#define FONT_BOLD                 -*-montecarlo-bold-*-*-*-*-*-*-*-*-*-*-*
+!#define FONT                      -*-speedy-*-*-*-*-11-*-*-*-*-*-*-*
+!#define FONT_BOLD                 -*-speedy-*-*-*-*-11-*-*-*-*-*-*-*
+
+!! about: https://en.wikipedia.org/wiki/Fixed_(typeface)
+#define FONT                       -misc-fixed-medium-r-normal-*-18-120-100-100-c-90-iso10646-1
+#define FONT_BOLD                  -misc-fixed-bold-r-normal-*-18-120-100-100-c-90-iso10646-1
+
+/*** Settings for various applications ***/
+!XLock.mode:                     blank
+
+#include "/home/arch/.archcfg/look-zenburn.xrdb"
+
+#include "/home/arch/.archcfg/xterm.xrdb"
