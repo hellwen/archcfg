@@ -17,4 +17,4 @@ eval "$(pyenv virtualenv-init -)"
 #xinput disable 11
 
 # set ibm trackpoint speed
-# xinput --set-prop 12 'libinput Accel Speed' 0.1
+#xinput --set-prop 12 'libinput Accel Speed' 0.1

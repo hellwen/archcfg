@@ -66,6 +66,9 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# defined by hellwen.wu
+bindsym $mod+Ctrl+l exec i3lock -i ~/.archcfg/lock.png
+
 # split in horizontal orientation
 bindsym $mod+n split h
 
