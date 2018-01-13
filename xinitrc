@@ -43,6 +43,7 @@ ibus-daemon -x -r -d
 # set backgroup image
 # 执行后配置：feh --bg-scale /home/arch/.xrdb/backgroup.png
 sh ~/.fehbg &
+copyq &
 
-exec i3
-#exec qtile
+#exec i3
+exec qtile
