@@ -30,15 +30,26 @@ from libqtile import layout, bar, widget, hook
 
 mod = "mod4"
 
-black  = "#282828"
-red    = "#cc241d"
-green  = "#98971a"
-yellow = "#d79921"
-blue   = "#458588"
-purple = "#b16286"
-aqua   = "#689d6a"
-white  = "#ebdbb2"
-gray   = "#928374"
+orange      = "#FFA500"
+l_pink      = "#FFB6C1"
+pink        = "#FFC0CB"
+m_purple    = "#9370DB"
+purple      = "#800080"
+l_blue      = "#ADD8E6"
+blue        = "#0000FF"
+l_green     = "#32CD32"
+green       = "#008000"
+l_yellow    = "#FFFFE0"
+yellow      = "#FFFF00"
+glod        = "#FF7F50"
+coral       = "#FF7F50"
+l_coral     = "#F08080"
+red         = "#FF0000"
+brown       = "#A52A2A"
+white       = "#FFFFFF"
+l_gray      = "#D3D3D3"
+gray        = "#808080"
+black       = "#282828"
 
 keys = [
     # Switch between screens
@@ -80,7 +91,7 @@ keys = [
     Key([mod, "shift"], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
 
     # lock secreen
-    Key([mod, "control"], "l", lazy.spawn("i3lock -i /home/arch/.xrdb/lock.png -c 000000")),
+    Key(["control", "shift"], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
 
     Key([mod], "z", lazy.window.toggle_floating()),
     #Key([mod], "n", lazy.window.toggle_minimize()),
@@ -120,8 +131,8 @@ myLayouts = {
         layout.Max(),
     ],
     "g": [
-        layout.Max(),
         myMonadTall,
+        layout.Max(),
     ],
 }
 
@@ -156,19 +167,14 @@ screens = [
     Screen(
         bottom=bar.Bar([
             widget.TextBox(
-                text=u"Arch >",
-                background=blue,
+                text=u"Arch",
+                background=l_blue,
                 foreground=black,
                 markup=True
             ),
             widget.CurrentLayout(
                 fontsize=16,
-                background=gray,
-                foreground=black
-            ),
-            widget.TextBox(
-                text=u">",
-                background=gray,
+                background=l_gray,
                 foreground=black
             ),
             widget.Prompt(
@@ -195,24 +201,23 @@ screens = [
                 foreground=white,
                 padding=0
             ),
-            widget.TextBox(text=u"< Cpu", fontsize=16, background=black, foreground=gray,),
-            widget.CPUGraph(graph_color='0066FF', fill_color='001188', border_width=1, line_width=1),
+            widget.TextBox("C", fontsize=16, background=black, foreground=white),
+            widget.CPUGraph(border_width=0, line_width=1, background=black),
 
-            widget.TextBox(text="< Mem", fontsize=16),
-            widget.MemoryGraph(graph_color='22FF44', fill_color='11AA11', border_width=1, line_width=1),
+            widget.TextBox("M", fontsize=16, background=black, foreground=white),
+            widget.MemoryGraph(border_width=0, line_width=1, background=black),
 
-            widget.TextBox(text="< Net", fontsize=16),
-            widget.NetGraph(border_width=1, line_width=1),
+            widget.TextBox('B:', fontsize=16, background=orange, foreground=black),
+            widget.Battery(background=orange, foreground=black),
 
-            widget.TextBox(text="< Bat:", fontsize=16),
-            widget.Battery(background=aqua, foreground=black),
+            widget.TextBox('V:', fontsize=16, background=l_green, foreground=black),
+            widget.Volume(background=l_green, foreground=black),
 
-            widget.TextBox('Vol:', fontsize=16, background=aqua, foreground=black),
-            widget.Volume(background=aqua, foreground=black),
+            # widget.LaunchBar(progs=('chrome', 'google-chrome-stable', 'logout from qtile'))
 
             widget.Clock(
-                format=u'< %Y-%m-%d %H:%M',
-                background=purple,
+                format=u'%Y-%m-%d %H:%M',
+                background=m_purple,
                 foreground=black
             ),
             widget.Systray(
