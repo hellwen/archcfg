@@ -103,14 +103,14 @@ keys = [
     Key([mod], "m", lazy.layout.maximize()),
 ]
 
-myMonadTall = layout.MonadTall()
+myMonadTall = layout.MonadTall(
+    border_focus=l_gray,
+    border_width=1
+)
 
-myStack = layout.Stack(
-    border_focus=blue,
-    border_normal=gray,
-    border_width=2,
-    margin=2,
-    num_stacks=2,
+floating_layout = layout.Floating(
+    border_focus=l_gray,
+    border_width=1
 )
 
 myLayouts = {
@@ -207,10 +207,10 @@ screens = [
             widget.TextBox("M", fontsize=16, background=black, foreground=white),
             widget.MemoryGraph(border_width=0, line_width=1, background=black),
 
-            widget.TextBox('B:', fontsize=16, background=orange, foreground=black),
+            # widget.TextBox('B:', fontsize=16, background=orange, foreground=black),
             widget.Battery(background=orange, foreground=black),
 
-            widget.TextBox('V:', fontsize=16, background=l_green, foreground=black),
+            # widget.TextBox('V:', fontsize=16, background=l_green, foreground=black),
             widget.Volume(background=l_green, foreground=black),
 
             # widget.LaunchBar(progs=('chrome', 'google-chrome-stable', 'logout from qtile'))
@@ -239,14 +239,9 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []
 main = None
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(
-    border_focus = blue,
-    border_normal = gray,
-    border_width = 2
-)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 

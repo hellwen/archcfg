@@ -9,8 +9,8 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # pyenv 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 
 # disable touchpad
 # xinput list all drives
