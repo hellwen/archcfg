@@ -67,10 +67,6 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 
-    # Move windows up or down in current stack
-    Key([mod, "control"], "k", lazy.layout.shuffle_down()),
-    Key([mod, "control"], "j", lazy.layout.shuffle_up()),
-
     # Key([mod], "Return", lazy.spawn("urxvt -fg lightgray -bg black -tr -tint lightgray -sh 40")),
     Key([mod], "Return", lazy.spawn("xterm")),
     Key([mod], "b", lazy.spawn("google-chrome-stable")),
@@ -87,8 +83,8 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
 
     # add volume control
-    Key([mod, "shift"], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
-    Key([mod, "shift"], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
+    Key([mod, "control"], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
+    Key([mod, "control"], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
 
     # lock secreen
     Key(["control", "shift"], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
@@ -113,38 +109,38 @@ floating_layout = layout.Floating(
     border_width=1
 )
 
-myLayouts = {
-    "a": [
-        myMonadTall,
-        layout.Max(),
-    ],
-    "s": [
-        myMonadTall,
-        layout.Max(),
-    ],
-    "d": [
-        myMonadTall,
-        layout.Max(),
-    ],
-    "f": [
-        myMonadTall,
-        layout.Max(),
-    ],
-    "g": [
-        myMonadTall,
-        layout.Max(),
-    ],
+myWindows = {
+    'a': {
+        'matches': None,
+        'layouts': [myMonadTall, layout.Max()]
+    },
+    's': {
+        'matches': None,
+        'layouts': [myMonadTall, layout.Max()]
+    },
+    "d": {
+        'matches': None,
+        'layouts': [myMonadTall, layout.Max()]
+    },
+    "f": {
+        'matches': None,
+        'layouts': [myMonadTall, layout.Max()]
+    },
+    "g": {
+        'matches': [Match(wm_class=["google-chrome-stable"])],
+        'layouts': [myMonadTall, layout.Max()]
+    },
+    "v": {
+        'matches': None,
+        'layouts': [myMonadTall, layout.Max()]
+    },
+    "c": {
+        'matches': None,
+        'layouts': [myMonadTall, layout.Max()]
+    },
 }
 
-myMatches = {
-    "a": None,
-    "s": None,
-    "d": None,
-    "f": None,
-    "g": [Match(wm_class=["google-chrome-stable"])]
-}
-
-groups = [Group(i, layouts=myLayouts[i], matches=myMatches[i]) for i in "asdfg"]
+groups = [Group(i, layouts=myWindows[i]['layouts'], matches=myWindows[i]['layouts']) for i in myWindows]
 
 for i in groups:
     # mod1 + letter of group = switch to group
