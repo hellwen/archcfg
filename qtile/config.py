@@ -69,7 +69,10 @@ keys = [
 
     # Key([mod], "Return", lazy.spawn("urxvt -fg lightgray -bg black -tr -tint lightgray -sh 40")),
     Key([mod], "Return", lazy.spawn("xterm")),
+
+    # Short Key by hellwen.wu
     Key([mod], "b", lazy.spawn("google-chrome-stable")),
+    Key([mod], "p", lazy.spawn("ranger")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -130,13 +133,13 @@ myWindows = {
         'matches': [Match(wm_class=["google-chrome-stable"])],
         'layouts': [myMonadTall, layout.Max()]
     },
-    "v": {
-        'matches': None,
-        'layouts': [myMonadTall, layout.Max()]
-    },
     "c": {
         'matches': None,
         'layouts': [myMonadTall, layout.Max()]
+    },
+    "v": {
+        'matches': None,
+        'layouts': [layout.Max(), myMonadTall]
     },
 }
 

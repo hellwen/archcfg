@@ -34,16 +34,20 @@ fi
 
 export LC_CTYPE="zh_CN.UTF-8"
 
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
+#export GTK_IM_MODULE=ibus
+#export QT_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
+#ibus-daemon -x -r -d
 
-ibus-daemon -x -r -d
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+fcitx &
 
 # set backgroup image
 # 执行后配置：feh --bg-scale /home/arch/.xrdb/backgroup.png
 sh ~/.fehbg &
-copyq &
+#copyq &
 
 #exec i3
 exec qtile
