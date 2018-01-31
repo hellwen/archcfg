@@ -72,7 +72,7 @@ keys = [
 
     # Short Key by hellwen.wu
     Key([mod], "b", lazy.spawn("google-chrome-stable")),
-    Key([mod], "p", lazy.spawn("ranger")),
+    Key([mod], "p", lazy.spawn("xterm ranger")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
