@@ -1,3 +1,4 @@
+
 # Copyright (c) 2010 Aldo Cortesi
 # Copyright (c) 2010, 2014 dequis
 # Copyright (c) 2012 Randall Ma
@@ -51,10 +52,48 @@ l_gray      = "#D3D3D3"
 gray        = "#808080"
 black       = "#282828"
 
+def app_or_group(group, app):
+    def f(qtile):
+        if qtile.groupMap[group].windows:
+            qtile.groupMap[group].cmd_toscreen()
+        else:
+            qtile.groupMap[group].cmd_toscreen()
+            qtile.cmd_spawn(app)
+    return f
+
+def screenshot(save=True, copy=True):
+    def f(qtile):
+        path = Path.home() / 'images'
+        path /= f'screenshot_{str(int(time() * 100))}.png'
+        shot = subprocess.run(['scrot -s'], stdout=subprocess.PIPE)
+
+        if save:
+            with open(path, 'wb') as sc:
+                sc.write(shot.stdout)
+
+        if copy:
+            subprocess.run(['xclip', '-selection', 'clipboard', '-t',
+                            'image/png'], input=shot.stdout)
+    return f
+
+def backlight(action):
+    def f(qtile):
+        brightness = int(subprocess.run(['xbacklight', '-get'],
+                                        stdout=subprocess.PIPE).stdout)
+        if brightness != 1 or action != 'dec':
+            if (brightness > 49 and action == 'dec') \
+                                or (brightness > 39 and action == 'inc'):
+                subprocess.run(['xbacklight', f'-{action}', '10',
+                                '-fps', '10'])
+            else:
+                subprocess.run(['xbacklight', f'-{action}', '1'])
+    return f
+
 keys = [
     # Switch between screens
     Key([mod], "1", lazy.to_screen(0)),
     Key([mod], "2", lazy.to_screen(1)),
+    Key([mod], "3", lazy.to_screen(2)),
 
     # Switch between windows in current stack pane
     Key([mod], "h", lazy.layout.left()),
@@ -70,10 +109,6 @@ keys = [
     # Key([mod], "Return", lazy.spawn("urxvt -fg lightgray -bg black -tr -tint lightgray -sh 40")),
     Key([mod], "Return", lazy.spawn("xterm")),
 
-    # Short Key by hellwen.wu
-    Key([mod], "b", lazy.spawn("google-chrome-stable")),
-    Key([mod], "p", lazy.spawn("xterm ranger")),
-
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
     Key([mod], "space", lazy.next_layout()),
@@ -88,9 +123,13 @@ keys = [
     # add volume control
     Key([mod, "control"], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
     Key([mod, "control"], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
-
-    # lock secreen
-    Key(["control", "shift"], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
+    # lock screen
+    Key([mod, "control"], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
+    # Short Key by hellwen.wu
+    # Key([mod, "control"], "b", lazy.spawn("google-chrome-stable")),
+    Key([mod, "control"], "p", lazy.spawn("xterm ranger")),
+    Key([mod, "control"], "m", lazy.spawn("scrot")),
+    Key([mod], "b", lazy.function(app_or_group("www", "google-chrome-stable"))),
 
     Key([mod], "z", lazy.window.toggle_floating()),
     #Key([mod], "n", lazy.window.toggle_minimize()),
@@ -129,18 +168,6 @@ myWindows = {
         'matches': None,
         'layouts': [myMonadTall, layout.Max()]
     },
-    "g": {
-        'matches': [Match(wm_class=["google-chrome-stable"])],
-        'layouts': [myMonadTall, layout.Max()]
-    },
-    "c": {
-        'matches': None,
-        'layouts': [myMonadTall, layout.Max()]
-    },
-    "v": {
-        'matches': None,
-        'layouts': [layout.Max(), myMonadTall]
-    },
 }
 
 groups = [Group(i, layouts=myWindows[i]['layouts'], matches=myWindows[i]['layouts']) for i in myWindows]
@@ -156,35 +183,41 @@ for i in groups:
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
     )
 
+groups.extend([
+    Group('www', layouts=[layout.Max()]),
+])
+
 widget_defaults = dict(
     font='Arial',
     fontsize=16,
     padding=3,
 )
 
-screens = [
-    Screen(
-        bottom=bar.Bar([
-            widget.TextBox(
-                text=u"Arch",
+
+main_bar = bar.Bar(
+        [
+            widget.CurrentScreen(
+                active_text="Arch",
+                inactive_text="-",
+            ),
+            widget.GroupBox(
                 background=l_blue,
                 foreground=black,
-                markup=True
+                center_aligned=True,
+                highlight_color=[red, 'ffffff'],
+                highlight_method="line",
             ),
             widget.CurrentLayout(
-                fontsize=16,
                 background=l_gray,
                 foreground=black
             ),
             widget.Prompt(
-                fontsize=16,
                 background=yellow,
                 foreground=gray,
                 padding=0
             ),
             widget.TextBox(
                 text=u"[",
-                fontsize=16,
                 background=black,
                 foreground=gray,
                 padding=0
@@ -195,21 +228,20 @@ screens = [
             ),
             widget.TextBox(
                 text=u"]",
-                fontsize=16,
                 background=black,
                 foreground=white,
                 padding=0
             ),
-            widget.TextBox("C", fontsize=16, background=black, foreground=white),
+            widget.TextBox("C", background=black, foreground=white),
             widget.CPUGraph(border_width=0, line_width=1, background=black),
 
-            widget.TextBox("M", fontsize=16, background=black, foreground=white),
+            widget.TextBox("M", background=black, foreground=white),
             widget.MemoryGraph(border_width=0, line_width=1, background=black),
 
-            # widget.TextBox('B:', fontsize=16, background=orange, foreground=black),
+            # widget.TextBox('B:', background=orange, foreground=black),
             widget.Battery(background=orange, foreground=black),
 
-            # widget.TextBox('V:', fontsize=16, background=l_green, foreground=black),
+            # widget.TextBox('V:', background=l_green, foreground=black),
             widget.Volume(background=l_green, foreground=black),
 
             # widget.LaunchBar(progs=('chrome', 'google-chrome-stable', 'logout from qtile'))
@@ -222,9 +254,9 @@ screens = [
             widget.Systray(
                 background=black
             ),
-        ], 20),
-    ),
-]
+        ], 25)
+
+screens = [Screen(top=main_bar), Screen(), Screen()]
 
 # Drag floating layouts.
 mouse = [
