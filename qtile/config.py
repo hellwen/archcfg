@@ -28,6 +28,10 @@
 from libqtile.config import Key, Screen, Group, Drag, Click, Match
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
+from pathlib import Path
+import subprocess
+from time import time
+from pathlib import Path
 
 mod = "mod4"
 
@@ -61,19 +65,15 @@ def app_or_group(group, app):
             qtile.cmd_spawn(app)
     return f
 
-def screenshot(save=True, copy=True):
+def screenshot(copy=True):
     def f(qtile):
         path = Path.home() / 'images'
         path /= f'screenshot_{str(int(time() * 100))}.png'
-        shot = subprocess.run(['scrot -s'], stdout=subprocess.PIPE)
-
-        if save:
-            with open(path, 'wb') as sc:
-                sc.write(shot.stdout)
+        shot = subprocess.run(['scrot', path])
 
         if copy:
             subprocess.run(['xclip', '-selection', 'clipboard', '-t',
-                            'image/png'], input=shot.stdout)
+                            'image/png', '-i', path])
     return f
 
 def backlight(action):
@@ -121,29 +121,44 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
 
     # add volume control
-    Key([mod, "control"], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
-    Key([mod, "control"], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
+    # Key([mod, "control"], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
+    # Key([mod, "control"], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
     # lock screen
-    Key([mod, "control"], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
+    # Key([mod, "control"], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
     # Short Key by hellwen.wu
     # Key([mod, "control"], "b", lazy.spawn("google-chrome-stable")),
     Key([mod, "control"], "p", lazy.spawn("xterm ranger")),
-    Key([mod, "control"], "m", lazy.spawn("scrot")),
-    Key([mod], "b", lazy.function(app_or_group("www", "google-chrome-stable"))),
+    Key([mod, "control"], "m", lazy.function(screenshot())),
+    Key([mod, "control"], "n", lazy.function(app_or_group("www", "google-chrome-stable"))),
 
     Key([mod], "z", lazy.window.toggle_floating()),
-    #Key([mod], "n", lazy.window.toggle_minimize()),
-    #Key([mod], "m", lazy.window.toggle_maximize()),
+    # Key([mod], "n", lazy.window.toggle_minimize()),
+    Key([mod], "m", lazy.window.toggle_maximize()),
 
-    Key([mod], "i", lazy.layout.grow()),
-    Key([mod], "o", lazy.layout.shrink()),
-    Key([mod], "n", lazy.layout.normalize()),
-    Key([mod], "m", lazy.layout.maximize()),
+
+    Key([mod, "control"], "j", lazy.layout.grow_down()),
+    Key([mod, "control"], "k", lazy.layout.grow_up()),
+    Key([mod, "control"], "h", lazy.layout.grow_left()),
+    Key([mod, "control"], "l", lazy.layout.grow_right()),
+
+    # layout MonadTall
+    # Key([mod], "i", lazy.layout.grow()),
+    # Key([mod], "o", lazy.layout.shrink()),
+    # Key([mod], "n", lazy.layout.normalize()),
+    # Key([mod], "m", lazy.layout.maximize()),
 ]
 
 myMonadTall = layout.MonadTall(
     border_focus=l_gray,
     border_width=1
+)
+
+myColumns = layout.Columns(
+    name="Cool",
+    autosplit=True,
+    border_focus=l_gray,
+    border_width=1,
+    grow_amount=20,
 )
 
 floating_layout = layout.Floating(
@@ -154,19 +169,23 @@ floating_layout = layout.Floating(
 myWindows = {
     'a': {
         'matches': None,
-        'layouts': [myMonadTall, layout.Max()]
+        'layouts': [myColumns, layout.Max()]
     },
     's': {
         'matches': None,
-        'layouts': [myMonadTall, layout.Max()]
+        'layouts': [myColumns, layout.Max()]
     },
     "d": {
         'matches': None,
-        'layouts': [myMonadTall, layout.Max()]
+        'layouts': [myColumns, layout.Max()]
     },
     "f": {
         'matches': None,
-        'layouts': [myMonadTall, layout.Max()]
+        'layouts': [myColumns, layout.Max()]
+    },
+    "g": {
+        'matches': None,
+        'layouts': [layout.Max(), myColumns]
     },
 }
 
@@ -184,7 +203,7 @@ for i in groups:
     )
 
 groups.extend([
-    Group('www', layouts=[layout.Max()]),
+    Group('g', layouts=[layout.Max()]),
 ])
 
 widget_defaults = dict(
@@ -205,7 +224,7 @@ main_bar = bar.Bar(
                 foreground=black,
                 center_aligned=True,
                 highlight_color=[red, 'ffffff'],
-                highlight_method="line",
+                highlight_method="block",
             ),
             widget.CurrentLayout(
                 background=l_gray,
