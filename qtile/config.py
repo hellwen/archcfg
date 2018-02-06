@@ -34,6 +34,7 @@ from time import time
 from pathlib import Path
 
 mod = "mod4"
+alt = "mod1"
 
 orange      = "#FFA500"
 l_pink      = "#FFB6C1"
@@ -96,16 +97,31 @@ keys = [
     Key([mod], "3", lazy.to_screen(2)),
 
     # Switch between windows in current stack pane
-    Key([mod], "h", lazy.layout.left()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
+    Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
 
-    Key([mod, "shift"], "h", lazy.layout.swap_left()),
-    Key([mod, "shift"], "l", lazy.layout.swap_right()),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
 
+    Key([mod, "control"], "j", lazy.layout.grow_down()),
+    Key([mod, "control"], "k", lazy.layout.grow_up()),
+    Key([mod, "control"], "h", lazy.layout.grow_left()),
+    Key([mod, "control"], "l", lazy.layout.grow_right()),
+
+    # layout
+    Key([mod], "z", lazy.window.toggle_floating()),
+    Key([mod], "n", lazy.window.toggle_minimize()),
+    Key([mod], "m", lazy.window.toggle_maximize()),
+
+    # layout MonadTall
+    # Key([mod], "i", lazy.layout.grow()),
+    # Key([mod], "o", lazy.layout.shrink()),
+    # Key([mod], "n", lazy.layout.normalize()),
+    # Key([mod], "m", lazy.layout.maximize()),
     # Key([mod], "Return", lazy.spawn("urxvt -fg lightgray -bg black -tr -tint lightgray -sh 40")),
     Key([mod], "Return", lazy.spawn("xterm")),
 
@@ -113,39 +129,25 @@ keys = [
     Key([mod], "Tab", lazy.next_layout()),
     Key([mod], "space", lazy.next_layout()),
 
-    Key([mod], "w", lazy.window.kill()),
-
+    Key([mod, "control"], "w", lazy.window.kill()),
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
 
     Key([mod], "r", lazy.spawncmd()),
 
-    # add volume control
-    # Key([mod, "control"], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
-    # Key([mod, "control"], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
-    # lock screen
-    # Key([mod, "control"], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
-    # Short Key by hellwen.wu
-    # Key([mod, "control"], "b", lazy.spawn("google-chrome-stable")),
-    Key([mod, "control"], "p", lazy.spawn("xterm ranger")),
-    Key([mod, "control"], "m", lazy.function(screenshot())),
-    Key([mod, "control"], "n", lazy.function(app_or_group("www", "google-chrome-stable"))),
-
-    Key([mod], "z", lazy.window.toggle_floating()),
-    # Key([mod], "n", lazy.window.toggle_minimize()),
-    Key([mod], "m", lazy.window.toggle_maximize()),
-
-
-    Key([mod, "control"], "j", lazy.layout.grow_down()),
-    Key([mod, "control"], "k", lazy.layout.grow_up()),
-    Key([mod, "control"], "h", lazy.layout.grow_left()),
-    Key([mod, "control"], "l", lazy.layout.grow_right()),
-
-    # layout MonadTall
-    # Key([mod], "i", lazy.layout.grow()),
-    # Key([mod], "o", lazy.layout.shrink()),
-    # Key([mod], "n", lazy.layout.normalize()),
-    # Key([mod], "m", lazy.layout.maximize()),
+    # Short Key
+    ## volume control
+    Key([mod, alt], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
+    Key([mod, alt], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
+    Key([mod, alt], "h", lazy.spawn("amixer -c 0 -q set Master 100")),
+    Key([mod, alt], "l", lazy.spawn("amixer -c 0 -q set Master 0")),
+    ## lock screen
+    Key([alt], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
+    ## apps
+    Key([alt], "b", lazy.spawn("google-chrome-stable")),
+    Key([alt], "p", lazy.spawn("xterm ranger")),
+    Key([alt], "m", lazy.function(screenshot())),
+    Key([alt], "n", lazy.function(app_or_group("www", "google-chrome-stable"))),
 ]
 
 myMonadTall = layout.MonadTall(
