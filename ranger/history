@@ -9,3 +9,4 @@ open_with l
 cd ~
 open_with w3m
 cd /home/arch/documents/work_for_douwa/meeting
+open_with google-chrome-stable

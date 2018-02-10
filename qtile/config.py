@@ -66,11 +66,14 @@ def app_or_group(group, app):
             qtile.cmd_spawn(app)
     return f
 
-def screenshot(copy=True):
+def screenshot(copy=True, selection=False):
     def f(qtile):
         path = Path.home() / 'images'
         path /= f'screenshot_{str(int(time() * 100))}.png'
-        shot = subprocess.run(['scrot', path])
+        if selection:
+            shot = subprocess.check_call(['scrot -s'])
+        else:
+            shot = subprocess.check_call(['scrot', path])
 
         if copy:
             subprocess.run(['xclip', '-selection', 'clipboard', '-t',
@@ -145,9 +148,9 @@ keys = [
     Key([alt], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
     ## apps
     Key([alt], "b", lazy.spawn("google-chrome-stable")),
-    Key([alt], "p", lazy.spawn("xterm ranger")),
-    Key([alt], "m", lazy.function(screenshot())),
     Key([alt], "n", lazy.function(app_or_group("www", "google-chrome-stable"))),
+    Key([alt], "f", lazy.spawn("xterm ranger")),
+    Key([alt], "p", lazy.function(screenshot())),
 ]
 
 myMonadTall = layout.MonadTall(
@@ -156,11 +159,15 @@ myMonadTall = layout.MonadTall(
 )
 
 myColumns = layout.Columns(
-    name="Cool",
-    autosplit=True,
+    name="C",
+    autosplit=False,
     border_focus=l_gray,
     border_width=1,
     grow_amount=20,
+)
+
+myMax = layout.Max(
+    name="M",
 )
 
 floating_layout = layout.Floating(
@@ -171,23 +178,23 @@ floating_layout = layout.Floating(
 myWindows = {
     'a': {
         'matches': None,
-        'layouts': [myColumns, layout.Max()]
+        'layouts': [myColumns, myMax]
     },
     's': {
         'matches': None,
-        'layouts': [myColumns, layout.Max()]
+        'layouts': [myColumns, myMax]
     },
     "d": {
         'matches': None,
-        'layouts': [myColumns, layout.Max()]
+        'layouts': [myColumns, myMax]
     },
     "f": {
         'matches': None,
-        'layouts': [myColumns, layout.Max()]
+        'layouts': [myColumns, myMax]
     },
     "g": {
         'matches': None,
-        'layouts': [layout.Max(), myColumns]
+        'layouts': [myMax, myColumns]
     },
 }
 
@@ -213,7 +220,6 @@ widget_defaults = dict(
     fontsize=16,
     padding=3,
 )
-
 
 main_bar = bar.Bar(
         [
@@ -243,7 +249,7 @@ main_bar = bar.Bar(
                 foreground=gray,
                 padding=0
             ),
-            widget.WindowName(
+            widget.WindowTabs(
                 background=black,
                 foreground=white
             ),
@@ -268,7 +274,7 @@ main_bar = bar.Bar(
             # widget.LaunchBar(progs=('chrome', 'google-chrome-stable', 'logout from qtile'))
 
             widget.Clock(
-                format=u'%Y-%m-%d %H:%M',
+                format=u'%m-%d %H:%M',
                 background=m_purple,
                 foreground=black
             ),

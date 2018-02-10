@@ -5,10 +5,11 @@
 
 # get info from xrandr
 connectedOutputs=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+disconnectedOutputs=$(xrandr | grep " disconnected" | sed -e "s/\([A-Z0-9]\+\) disconnected.*/\1/")
 activeOutput=$(xrandr | grep -E " connected (primary )?[1-9]+" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
 
 # initialize variables
-execute="xrandr --output $activeOutput --auto"
+execute="xrandr --output $activeOutput --auto --primary"
 i=1
 switch=0
 
@@ -21,6 +22,11 @@ do
     fi
 
     execute="$execute --output $display --auto --left-of $activeOutput"
+done
+
+for display in $disconnectedOutputs
+do
+    execute="$execute --output $display --off"
 done
 
 # check if the default setup needs to be executed then run it
