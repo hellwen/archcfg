@@ -45,8 +45,8 @@ export XMODIFIERS=@im=fcitx
 fcitx &
 
 # set backgroup image
-# 执行后配置：feh --bg-scale /home/arch/.xrdb/backgroup.png
-sh ~/.fehbg &
+feh --bg-scale '~/.archcfg/backgroup.png'
+# sh ~/.fehbg &
 #copyq &
 
 exec i3

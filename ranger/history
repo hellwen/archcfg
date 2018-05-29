@@ -10,4 +10,5 @@ open_with w3m
 cd /home/arch/documents/work_for_douwa/meeting
 open_with google-chrome-stable
 delete
+open_with m
 open_with 

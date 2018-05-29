@@ -46,10 +46,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -58,13 +58,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-# lock window
-bindsym $mod+Ctrl+l exec "i3lock -i /home/arch/.i3/i3lock.png"
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -73,7 +70,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -93,12 +90,9 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
-
-bindsym --release $mod+p exec "scrot -s ~/images/$(date +%y%m%d_%H%M%S)_ss.png -e 'xclip -selection c -t image/png < $f'"
-
+# bindsym $mod+p focus parent
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+c focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -126,8 +120,10 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -141,10 +137,10 @@ mode "resize" {
         # Pressing down will grow the window’s height.
 
 
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -165,13 +161,24 @@ bar {
         status_command i3status
 }
 
+## my define
+
+# lock window
+bindsym $mod+Ctrl+l exec "i3lock -i ~/.i3/i3lock.png"
+# screen shot
+bindsym --release $mod+p exec "scrot -s ~/images/$(date +%y%m%d_%H%M%S)_ss.png -e 'xclip -selection c -t image/png < $f'"
+
 # automatically putting clients on specific workspaces
 assign [class="chromium"] 1
-assign [class="xterm"] 2
 
 # automatically putting workspaces on specific screens
-workspace "1:web" output eDP1
+workspace 1 output eDP1
 workspace 2 output eDP1
-workspace 3 output HDMI2
-workspace 4 output HDMI2
-
+workspace 3 output eDP1
+workspace 4 output eDP1
+workspace 5 output eDP1
+workspace 6 output HDMI2
+workspace 7 output HDMI2
+workspace 8 output HDMI2
+workspace 9 output HDMI2
+workspace 0 output HDMI2
