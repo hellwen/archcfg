@@ -1,6 +1,5 @@
 open_with et
 open_with wps
-open_with 
 search 
 search ~/document
 search 恩雅
@@ -10,3 +9,5 @@ cd ~
 open_with w3m
 cd /home/arch/documents/work_for_douwa/meeting
 open_with google-chrome-stable
+delete
+open_with 

@@ -49,5 +49,5 @@ fcitx &
 sh ~/.fehbg &
 #copyq &
 
-#exec i3
-exec qtile
+exec i3
+#exec qtile

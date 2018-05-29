@@ -6,7 +6,7 @@
 # get info from xrandr
 connectedOutputs=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
 disconnectedOutputs=$(xrandr | grep " disconnected" | sed -e "s/\([A-Z0-9]\+\) disconnected.*/\1/")
-activeOutput=$(xrandr | grep -E " connected (primary )?[1-9]+" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+activeOutput=$(xrandr | grep -E " connected (primary )?[1-9]+" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/" | head -1)
 
 # initialize variables
 execute="xrandr --output $activeOutput --auto --primary"
@@ -21,7 +21,7 @@ do
         continue
     fi
 
-    execute="$execute --output $display --auto --left-of $activeOutput"
+    execute="$execute --output $display --auto --right-of $activeOutput"
 done
 
 for display in $disconnectedOutputs
@@ -33,7 +33,7 @@ done
 echo ""
 echo "Resulting Configuration:"
 echo $execute
-`$execute`
+# `$execute`
 
 echo ""
 echo "Resulting Status:"

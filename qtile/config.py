@@ -69,13 +69,13 @@ def app_or_group(group, app):
 def screenshot(copy=True, selection=False):
     def f(qtile):
         path = Path.home() / 'images'
-        path /= f'screenshot_{str(int(time() * 100))}.png'
+        path /= f'{str(int(time() * 100))}_screenshot.png'
         if selection:
-            shot = subprocess.check_call(['scrot -s'])
+            shot = subprocess.check_call(['scrot', '-s', path])
         else:
             shot = subprocess.check_call(['scrot', path])
 
-        if copy:
+        if shot == 0 and copy:
             subprocess.run(['xclip', '-selection', 'clipboard', '-t',
                             'image/png', '-i', path])
     return f
@@ -140,10 +140,10 @@ keys = [
 
     # Short Key
     ## volume control
-    Key([mod, alt], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
-    Key([mod, alt], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
-    Key([mod, alt], "h", lazy.spawn("amixer -c 0 -q set Master 100")),
-    Key([mod, alt], "l", lazy.spawn("amixer -c 0 -q set Master 0")),
+    Key([alt, "shift"], "k", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
+    Key([alt, "shift"], "j", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
+    Key([alt, "shift"], "h", lazy.spawn("amixer -c 0 -q set Master 100")),
+    Key([alt, "shift"], "l", lazy.spawn("amixer -c 0 -q set Master 0")),
     ## lock screen
     Key([alt], "l", lazy.spawn("i3lock -i /home/arch/.archcfg/lock.png")),
     ## apps
@@ -151,6 +151,7 @@ keys = [
     Key([alt], "n", lazy.function(app_or_group("www", "google-chrome-stable"))),
     Key([alt], "f", lazy.spawn("xterm ranger")),
     Key([alt], "p", lazy.function(screenshot())),
+    Key([alt, "shift"], "p", lazy.function(screenshot(selection=True))),
 ]
 
 myMonadTall = layout.MonadTall(
