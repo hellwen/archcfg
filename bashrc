@@ -8,12 +8,22 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
+function _update_ps1() {
+    PS1="$(~/Develop/go/bin/powerline-go -colorize-hostname -mode flat -cwd-mode plain)"
+}
+
+if [ "$TERM" != "linux" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
 alias scrotclip="file=~/images/`date "+%Y%m%d-%H%M%S_scrot.png"` && scrot ${file}"
 alias chrome='google-chrome-stable'
 alias more='less'
 alias vib='vi'
 alias vi='nvim'
 set -o vi
+
+export VISUAL="vim"
 
 
 # pyenv 

@@ -15,4 +15,6 @@ build:
 	ln -s ~/.archcfg/bashrc ~/.bashrc
 	ln -s ~/.archcfg/bash_profile ~/.bash_profile
 	ln -s ~/.archcfg/xorg.conf.d/ /etc/X11/xorg.conf.d
-	ln -s ~/.archcfg/i3 ~/.config/i3
+	ln -s ~/.archcfg/i3 ~/.i3
+	ln -s ~/.archcfg/nvim ~/.config/nvim
+	ln -s ~/.archcfg/ranger ~/.config/ranger
