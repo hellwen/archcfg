@@ -53,10 +53,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -65,10 +65,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+b split h
@@ -78,6 +78,8 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+# enter fullscreen to global
+bindsym $mod+Shift+f fullscreen toggle global
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -86,7 +88,6 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
@@ -172,8 +173,7 @@ bindsym $mod+$alt+j exec "amixer -c 0 -q set Master 2dB-"
 bindsym $mod+$alt+h exec "amixer -c 0 -q set Master 100"
 bindsym $mod+$alt+l exec "amixer -c 0 -q set Master 0"
 # screen shot
-# bindsym --release $mod+p exec "scrot -s ~/images/$(date +%y%m%d_%H%M%S)_ss.png -e 'xclip -selection c -t image/png < $f'"
-bindsym $mod+p exec "scrot -s ~/images/$(date +%y%m%d_%H%M%S)_ss.png -e 'xclip -selection c -t image/png < $f'"
+bindsym --release $mod+p exec "scrot -s ~/images/$(date +%y%m%d_%H%M%S)_ss.png -e 'xclip -selection c -t image/png < $f'"
 
 # automatically putting clients on specific workspaces
 assign [class="chromium"] 1
@@ -184,8 +184,11 @@ workspace 2 output eDP1
 workspace 3 output eDP1
 workspace 4 output eDP1
 workspace 5 output eDP1
-workspace 6 output HDMI2
+workspace 6 output eDP1
 workspace 7 output HDMI2
 workspace 8 output HDMI2
 workspace 9 output HDMI2
 workspace 0 output HDMI2
+
+bindsym $mod+m move workspace to output left
+bindsym $mod+Shift+m move workspace to output right

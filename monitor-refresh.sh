@@ -21,7 +21,7 @@ do
         continue
     fi
 
-    execute="$execute --output $display --auto --right-of $activeOutput"
+    execute="$execute --output $display --auto --rotate right --right-of $activeOutput"
 done
 
 for display in $disconnectedOutputs
