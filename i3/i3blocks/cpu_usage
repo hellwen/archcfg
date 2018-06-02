@@ -1,0 +1,13 @@
+#!/bin/sh
+
+used=`vmstat 1 3 | tail -1 | awk '{print 100-$15}'`
+
+# full
+echo ${used}%
+
+# short
+echo ${used}%
+
+if [[ $used -gt 90 ]]; then
+    echo "#FF5733"
+fi

@@ -18,3 +18,8 @@ font config
 pacman -S ttf-dejavu ttf-liberation wqy-zenhei ttf-arphic-ukai ttf-arphic-uming
 ln -s ~/.xrdb/fontconfig/ ~/.config/fontconfig
 ```
+
+app
+```
+pacman -S i3blocks
+```

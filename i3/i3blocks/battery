@@ -1,0 +1,34 @@
+#!/bin/sh
+
+AC="/sys/class/power_supply/AC/uevent"
+BAT="/sys/class/power_supply/BAT${BLOCK_INSTANCE:-1}/uevent"
+
+power_online=`cat $AC | awk -F= '/ONLINE/ {print $2}'`
+bat_status=`cat $BAT | awk -F= '/STATUS=/ {print $2}'`
+bat_power=`cat $BAT | awk -F= '/POWER_NOW=/ {print $2}'`
+bat_energy=`cat $BAT | awk -F= '/ENERGY_NOW=/ {print $2}'`
+bat_capacity=`cat $BAT | awk -F= '/CAPACITY=/ {print $2}'`
+
+if [[ $bat_capacity -gt 97 ]]; then
+    bat_capacity="Full"
+else
+    bat_capacity="${bat_capacity}%"
+fi
+
+if [ $power_online = "1" ]; then
+    echo "${bat_capacity} (AC)"
+    echo "${bat_capacity} (AC)"
+else
+    bat_lift=$(expr $bat_energy / $bat_power)
+    bat_minute=$(echo "scale=3; $bat_energy / $bat_power" | bc -l)
+    bat_minute=$(echo "($bat_minute - $bat_lift) * 60" | bc -l)
+    bat_minute=`printf '%.0f' $bat_minute`
+
+    if [ $bat_status = "Discharging" ]; then
+        echo "${bat_capacity} (${bat_lift}h ${bat_minute}m)"
+        echo "${bat_capacity} (${bat_lift}h ${bat_minute}m)"
+    elif [ $bat_status = "Unknown" ]; then
+        echo "${bat_capacity} UNK"
+        echo "${bat_capacity} UNK"
+    fi
+fi
