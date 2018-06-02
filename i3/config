@@ -200,3 +200,6 @@ workspace 0 output HDMI2
 
 bindsym $mod+m move workspace to output left
 bindsym $mod+Shift+m move workspace to output right
+
+# auto start
+#exec --no-startup-id fcitx
