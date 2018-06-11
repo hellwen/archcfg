@@ -1,0 +1,21 @@
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+menuentry 'My Arch Linux' {
+        load_video
+        set gfxpayload=keep
+        insmod gzio
+        insmod part_gpt
+        insmod xfs
+        set root='hd0,gpt2'
+        if [ x = xy ]; then
+          search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt2 --hint-efi=hd0,gpt2 --hint-baremetal=ahci0,gpt2  cda52f03-ea43-44dd-bf62-6defe65cc765
+        else
+          search --no-floppy --fs-uuid --set=root cda52f03-ea43-44dd-bf62-6defe65cc765
+        fi
+        echo    'Loading Linux linux ...'
+        linux   /vmlinuz-linux root=UUID=412d830c-e11e-44b4-abb9-3b59f885b803 rw quiet resume=/dev/sda5
+        echo    'Loading initial ramdisk ...'
+        initrd  /initramfs-linux.img
+}

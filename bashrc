@@ -17,7 +17,6 @@ if [ "$TERM" != "linux" ]; then
 fi
 
 alias scrotclip="file=~/images/`date "+%Y%m%d-%H%M%S_scrot.png"` && scrot ${file}"
-alias chrome='google-chrome-stable'
 alias more='less'
 alias vib='vi'
 alias vi='nvim'
@@ -47,3 +46,12 @@ setxkbmap -layout us -option ctrl:nocaps
 # xmodmap -e 'clear Lock'
 # xmodmap -e 'keycode 0x7e = Control_R'
 # xmodmap -e 'add Control = Control_R'
+
+# 每次记录cd的目录，并在打开term的时候默认打开
+function cd {
+    builtin cd $@
+    echo $(pwd) > /tmp/whereami
+}
+if [ -f /tmp/whereami ]; then
+    cd "`cat /tmp/whereami`"
+fi

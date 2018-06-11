@@ -44,5 +44,11 @@ set shiftwidth=4
 "将tab转换成space
 set expandtab
 
-"不换行
-set nowrap
+" 不换行
+" set nowrap
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)

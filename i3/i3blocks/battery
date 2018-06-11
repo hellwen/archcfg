@@ -7,12 +7,12 @@ power_online=`cat $AC | awk -F= '/ONLINE/ {print $2}'`
 bat_status=`cat $BAT | awk -F= '/STATUS=/ {print $2}'`
 bat_power=`cat $BAT | awk -F= '/POWER_NOW=/ {print $2}'`
 bat_energy=`cat $BAT | awk -F= '/ENERGY_NOW=/ {print $2}'`
-bat_capacity=`cat $BAT | awk -F= '/CAPACITY=/ {print $2}'`
+bat_capacity_num=`cat $BAT | awk -F= '/CAPACITY=/ {print $2}'`
 
-if [[ $bat_capacity -gt 97 ]]; then
+if [[ $bat_capacity_num -gt 97 ]]; then
     bat_capacity="Full"
 else
-    bat_capacity="${bat_capacity}%"
+    bat_capacity="${bat_capacity_num}%"
 fi
 
 if [ $power_online = "1" ]; then
@@ -31,4 +31,8 @@ else
         echo "${bat_capacity} UNK"
         echo "${bat_capacity} UNK"
     fi
+fi
+
+if [[ $bat_capacity_num -le 10 ]]; then
+    echo "#FF5733"
 fi
