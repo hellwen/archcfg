@@ -4,3 +4,4 @@ __pycache__
 *.swap
 nvim/plugged/
 .netrwhist
+ranger/tagged

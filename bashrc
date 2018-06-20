@@ -20,6 +20,14 @@ alias scrotclip="file=~/images/`date "+%Y%m%d-%H%M%S_scrot.png"` && scrot ${file
 alias more='less'
 alias vib='vi'
 alias vi='nvim'
+
+# for git
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Cgreen(%cr)%Creset' --abbrev-commit"
+alias gs="git status"
+alias ga="git add"
+alias gm="git commit -m"
+alias gp="git push"
+
 set -o vi
 
 export VISUAL="vim"
@@ -55,3 +63,5 @@ function cd {
 if [ -f /tmp/whereami ]; then
     cd "`cat /tmp/whereami`"
 fi
+
+
