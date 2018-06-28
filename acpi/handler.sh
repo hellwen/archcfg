@@ -69,12 +69,12 @@ case "$1" in
                 ;;
         esac
         ;;
-    video/brightnessup)
+    cd/prev)
         logger "Brightness up"
         amixer -q set Master 1+ toggle
         # xbacklight -display :0.0 +10
         ;;
-    video/brightnessdown)
+    cd/next)
         logger "Brightness down"
         # xbacklight -display :0.0 -10
         ;;

@@ -8,6 +8,10 @@ elif [ $1 = 'b' ]; then
   xrandr --output eDP1 --off \
      --output HDMI1 --auto --primary \
      --output HDMI2 --auto --rotate right --right-of HDMI1
+elif [ $1 = 'c' ]; then
+  xrandr --output eDP1 --auto --primary \
+     --output HDMI1 --off \
+     --output HDMI2 --auto --right-of eDP1
 else
   xrandr --output eDP1 --auto --primary \
     --output HDMI1 --off \

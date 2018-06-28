@@ -173,7 +173,8 @@ bar {
 ## my define
 
 # lock window
-bindsym $mod+Ctrl+l exec "i3lock -i ~/.i3/i3lock.png"
+# bindsym $mod+Ctrl+l exec "i3lock -i ~/.i3/i3lock.png"
+bindsym $mod+Ctrl+l exec "i3lock -c 000000 & systemctl suspend"
 # screen shot
 bindsym --release $mod+p exec "scrot -s ~/images/$(date +%y%m%d_%H%M%S)_ss.png -e 'xclip -selection c -t image/png < $f'"
 

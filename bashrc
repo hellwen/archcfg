@@ -28,6 +28,8 @@ alias ga="git add"
 alias gm="git commit -m"
 alias gp="git push"
 
+alias prp="pipenv run python"
+
 set -o vi
 
 export VISUAL="vim"
@@ -50,7 +52,7 @@ export GOPATH=$HOME/Develop/go
 export PATH=$PATH:$GOROOT/bin:$HOME/Develop/go/bin
 
 # key map
-setxkbmap -layout us -option ctrl:nocaps
+# setxkbmap -layout us -option ctrl:nocaps
 # xmodmap -e 'clear Lock'
 # xmodmap -e 'keycode 0x7e = Control_R'
 # xmodmap -e 'add Control = Control_R'
