@@ -1,3 +1,7 @@
+
+" set leader
+let mapleader = "\<Space>"
+
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -13,10 +17,11 @@ Plug 'vim-airline/vim-airline-themes'
 " 符号对齐，用于对齐代码中的=号两边
 Plug 'junegunn/vim-easy-align'
 " 缩进高亮，显示一条竖线
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 
 " HTML Style
 Plug 'mattn/emmet-vim'
+
 " Vue Style
 Plug 'posva/vim-vue'
 
@@ -43,6 +48,13 @@ set softtabstop=4
 set shiftwidth=4
 "将tab转换成space
 set expandtab
+
+" 复制到系统中
+"noremap <Leader>y "+y
+"noremap <Leader>d "+d
+"noremap <Leader>p "+p
+"noremap <Leader>P "+P
+set clipboard+=unnamedplus
 
 " 不换行
 " set nowrap

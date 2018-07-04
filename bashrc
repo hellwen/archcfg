@@ -12,12 +12,14 @@ function _update_ps1() {
     PS1="$(~/Develop/go/bin/powerline-go -colorize-hostname -mode flat -cwd-mode plain)"
 }
 
+# 快速 cd
+. ~/.archcfg/z.sh
+. ~/.archcfg/j.sh
+
 if [ "$TERM" != "linux" ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
-alias scrotclip="file=~/images/`date "+%Y%m%d-%H%M%S_scrot.png"` && scrot ${file}"
-alias more='less'
 alias vib='vi'
 alias vi='nvim'
 
@@ -27,13 +29,13 @@ alias gs="git status"
 alias ga="git add"
 alias gm="git commit -m"
 alias gp="git push"
+alias gd="git diff"
 
 alias prp="pipenv run python"
 
 set -o vi
 
 export VISUAL="vim"
-
 
 # pyenv 
 eval "$(pyenv init -)"
@@ -56,14 +58,4 @@ export PATH=$PATH:$GOROOT/bin:$HOME/Develop/go/bin
 # xmodmap -e 'clear Lock'
 # xmodmap -e 'keycode 0x7e = Control_R'
 # xmodmap -e 'add Control = Control_R'
-
-# 每次记录cd的目录，并在打开term的时候默认打开
-function cd {
-    builtin cd $@
-    echo $(pwd) > /tmp/whereami
-}
-if [ -f /tmp/whereami ]; then
-    cd "`cat /tmp/whereami`"
-fi
-
 
