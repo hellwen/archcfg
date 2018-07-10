@@ -25,6 +25,9 @@ Plug 'mattn/emmet-vim'
 " Vue Style
 Plug 'posva/vim-vue'
 
+" ctrlp
+Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+
 " Initialize plugin system
 call plug#end()
 

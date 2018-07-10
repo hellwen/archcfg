@@ -8,17 +8,23 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
+# powerline-go
 function _update_ps1() {
     PS1="$(~/Develop/go/bin/powerline-go -colorize-hostname -mode flat -cwd-mode plain)"
 }
 
-# 快速 cd
-. ~/.archcfg/z.sh
-. ~/.archcfg/j.sh
-
 if [ "$TERM" != "linux" ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
+
+# autoj
+if [ "$TERM" != "linux" ]; then
+    PROMPT_COMMAND="(autoj -p \"\$(command pwd -P 2>/dev/null)\" 2>/dev/null &); $PROMPT_COMMAND"
+fi
+alias j='autoj'
+
+# 快速 cd
+. ~/.archcfg/z.sh
 
 alias vib='vi'
 alias vi='nvim'
@@ -50,8 +56,9 @@ export NVM_DIR="$HOME/.nvm"
 # golang
 export GOROOT=$HOME/Develop/go1.9.4
 export GOPATH=$HOME/Develop/go
+export GOBIN=$HOME/Develop/go/bin
 
-export PATH=$PATH:$GOROOT/bin:$HOME/Develop/go/bin
+export PATH=$PATH:$GOROOT/bin:$GOBIN
 
 # key map
 # setxkbmap -layout us -option ctrl:nocaps
