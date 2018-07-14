@@ -7,21 +7,15 @@ fi
 
 echo "Change to ${TYPE}"
 
-if [ $TYPE == 'all' ]; then
+if [ $TYPE == "all" ]; then
   xrandr --output eDP1 --auto --primary \
      --output HDMI1 --auto --left-of eDP1 \
      --output HDMI2 --auto --rotate right --right-of eDP1
-elif [ $TYPE == 'dock' ]; then
-  xrandr --output eDP1 --off \
-     --output DP2-3 --auto --primary
-  xrandr --output eDP1 --off \
-     --output DP2-3 --auto --primary \
-     --output DP2-1 --auto --rotate right --right-of DP2-3
-elif [ $TYPE == 'desk' ]; then
-  xrandr --output eDP1 --off \
-     --output HDMI1 --auto --primary \
-     --output HDMI2 --auto --rotate right --right-of HDMI1
-elif [ $TYPE == 'show' ]; then
+elif [ $TYPE == "dock" ]; then
+  xrandr --output eDP1 --auto --primary \
+     --output DP2-3 --auto --left-of eDP1 \
+     --output DP2-1 --auto --rotate right --right-of eDP1
+elif [ $TYPE == "show" ]; then
   xrandr --output eDP1 --auto --primary \
      --output HDMI1 --off \
      --output HDMI2 --auto --right-of eDP1
@@ -35,4 +29,4 @@ else
     --output HDMI2 --off
 fi
 
-xrandr
+# xrandr

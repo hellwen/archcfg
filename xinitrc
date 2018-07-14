@@ -2,7 +2,7 @@
 
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
-userresources=$HOME/.Xresources
+userresources=$HOME/.archcfg/Xresources
 usermodmap=$HOME/.Xmodmap
 
 # merge in defaults and keymaps
@@ -48,6 +48,8 @@ fcitx &
 feh --bg-scale '~/.archcfg/backgroup.png'
 # sh ~/.fehbg &
 #copyq &
+
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
 exec i3
 #exec qtile
