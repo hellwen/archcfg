@@ -10,7 +10,8 @@ ln -s ~/.archcfg/bash_profile ~/.bash_profile
 
 # i3
 
-pacman -S i3 i3blocks
+pacman -S scrot xclip
+pacman -S i3 i3blocks i3lock
 
 ## config
 ln -s ~/.archcfg/i3 ~/.config/i3
