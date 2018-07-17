@@ -59,6 +59,8 @@ xterm*altSendsEscape: true
 ! Mouse selecting to copy, ctrl-v to paste
 ! Ctrl p to print screen content to file
 XTerm*VT100.Translations: #override \
+Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+Shift <KeyPress> Insert: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
 <BtnUp>: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
 Ctrl <KeyPress> P: print() \n
 

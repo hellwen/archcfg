@@ -173,8 +173,8 @@ bindsym $mod+r mode "resize"
 bar {
         position top
         # status_command i3status -c "~/.i3/i3status.conf"
-        # status_command i3blocks -c ~/.i3/i3blocks.conf
-        status_command i3blocks
+        status_command i3blocks -c ~/.archcfg/i3/i3blocks.conf
+        # status_command i3blocks
         tray_output primary
 }
 

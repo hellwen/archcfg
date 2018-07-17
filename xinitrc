@@ -49,7 +49,4 @@ feh --bg-scale '~/.archcfg/backgroup.png'
 # sh ~/.fehbg &
 #copyq &
 
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
-
 exec i3
-#exec qtile
