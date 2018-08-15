@@ -58,3 +58,6 @@ export PATH=$PATH:$GOROOT/bin:$GOBIN
 # xmodmap -e 'keycode 0x7e = Control_R'
 # xmodmap -e 'add Control = Control_R'
 
+
+# http proxy
+# export http_proxy=http://127.0.0.1:8118/

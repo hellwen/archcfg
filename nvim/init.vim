@@ -53,11 +53,31 @@ set shiftwidth=4
 set expandtab
 
 " 复制到系统中
-"noremap <Leader>y "+y
-"noremap <Leader>d "+d
-"noremap <Leader>p "+p
-"noremap <Leader>P "+P
-set clipboard+=unnamedplus
+noremap <Leader>y "+y
+noremap <Leader>d "+d
+noremap <Leader>p "+p
+noremap <Leader>P "+P
+" set clipboard+=unnamedplus
+
+" 分屏幕
+map <Leader>S <C-w>s
+map <Leader>V <C-w>v
+map <Leader>s <ESC>:Sex<CR>
+map <Leader>v <ESC>:Vex<CR>
+
+map <Leader>h <C-w>h
+map <Leader>j <C-w>j
+map <Leader>k <C-w>k
+map <Leader>l <C-w>l
+
+" 调整窗口大小：10winc + , 5winc >
+
+" Tab or :Te
+map <Leader>t <ESC>:Tex<CR>
+
+" Terminal
+map <Leader>e <ESC>:vs\|te<CR>
+map <Leader>E <ESC>:sp\|te<CR>
 
 " 不换行
 " set nowrap

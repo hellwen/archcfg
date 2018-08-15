@@ -1,0 +1,8 @@
+Host dev
+    HostName 47.97.182.182
+    User ops
+
+# registry prod env
+Host reg
+    HostName 47.96.127.105
+    User ops
