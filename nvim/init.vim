@@ -28,6 +28,10 @@ Plug 'posva/vim-vue'
 " ctrlp
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 
+" fzf
+" Plug 'junegunn/fzf', { 'dir': '/usr/bin/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -59,11 +63,20 @@ noremap <Leader>p "+p
 noremap <Leader>P "+P
 " set clipboard+=unnamedplus
 
+" fzf
+map <Leader>f <ESC>:FZF<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
 " 分屏幕
-map <Leader>S <C-w>s
-map <Leader>V <C-w>v
-map <Leader>s <ESC>:Sex<CR>
-map <Leader>v <ESC>:Vex<CR>
+map <Leader>s <C-w>s
+map <Leader>v <C-w>v
+" map <Leader>S <ESC>:Sex<CR>
+" map <Leader>V <ESC>:Vex<CR>
+map <Leader>S <ESC>:Sex<CR><ESC>:FZF<CR>
+map <Leader>V <ESC>:Vex<CR><ESC>:FZF<CR>
 
 map <Leader>h <C-w>h
 map <Leader>j <C-w>j
@@ -73,7 +86,8 @@ map <Leader>l <C-w>l
 " 调整窗口大小：10winc + , 5winc >
 
 " Tab or :Te
-map <Leader>t <ESC>:Tex<CR>
+" map <Leader>t <ESC>:Tex<CR>
+map <Leader>t <ESC>:Tex<CR><ESC>:FZF<CR>
 
 " Terminal
 map <Leader>e <ESC>:vs\|te<CR>
