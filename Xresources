@@ -64,7 +64,6 @@ Shift <KeyPress> Insert: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
 <BtnUp>: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
 Ctrl <KeyPress> P: print() \n
 
-
 !-- Tango color scheme
 *xterm*color0: #2e3436
 *xterm*color1: #cc0000

@@ -13,10 +13,10 @@ if [ "$TYPE" == "all" ]; then
      --output HDMI2 --auto --rotate right --right-of eDP1
 elif [ "$TYPE" == "dock" ]; then
   xrandr --output eDP1 --auto --primary \
-     --output DP2-3 --auto --left-of eDP1
+    --output DP2-1 --auto --rotate right --left-of eDP1
   xrandr --output eDP1 --auto --primary \
-     --output DP2-3 --auto --left-of eDP1 \
-     --output DP2-1 --auto --rotate right --right-of eDP1
+    --output DP2-1 --auto --rotate right --left-of eDP1 \
+    --output DP2-3 --auto --right-of eDP1
 elif [ "$TYPE" == "show" ]; then
   xrandr --output eDP1 --auto --primary \
      --output HDMI2 --auto --left-of eDP1

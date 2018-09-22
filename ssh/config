@@ -1,8 +1,15 @@
+Host dw_dev_001
+    HostName 116.62.213.56
+    User ops
+Host dw_001
+    HostName 47.96.127.105
+    User ops
+Host hk1
+    HostName 47.90.100.94
+    User ops
+Host hk2
+    HostName 47.52.106.141
+    User ops
 Host dev
     HostName 47.97.182.182
-    User ops
-
-# registry prod env
-Host reg
-    HostName 47.96.127.105
     User ops
