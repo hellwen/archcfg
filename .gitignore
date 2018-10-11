@@ -5,3 +5,4 @@ __pycache__
 nvim/plugged/
 .netrwhist
 ranger/tagged
+ssh/known_hosts
