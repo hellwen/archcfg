@@ -1,0 +1,83 @@
+! Xterm Configration Version 1.0
+! A mixed version for XTerm setting from Internet
+! @author 小指
+! @email qingzz@qingzz.cn
+! ~/.Xdefaults
+
+! Information
+XTerm*termName: Xterm-256Color
+
+! Attribute
+XTerm*loginShell: True
+XTerm.borderLess: True
+XTerm.cursorBlink: False
+XTerm*visualBell: False
+XTerm*marginBell: False
+XTerm*alwaysHighlight: True
+XTerm*SaveLines: 40960
+XTerm.geometry: 80x40
+xterm*colorUL: yellow
+xterm*colorBD: white
+XTerm*preeditType: Root
+
+! Fonts & Locale
+XTerm.utf8: True
+XTerm*locale: True
+XTerm.cjkWidth: False
+XTerm*utf8Title: True
+XTerm*xftAntialias: True
+
+! Chinese Input
+XTerm*inputMethod: fcitx
+XTerm*fontMenu*fontdefault*Label: Default
+
+! English font
+xterm*faceName: DejaVu Sans Mono:antialias=True:pixelsize=14
+! Chinese font
+xterm*faceNameDoublesize: WenQuanYi Micro Hei:pixelsize=14
+
+! Themes
+XTerm*scrollBar: False
+XTerm*jumpScroll: True
+XTerm*scrollKey: False
+XTerm*rightScrollBar: False
+XTerm*scrollTtyOutput: False
+XTerm*background: #363636
+XTerm*foreground: #FFFFFF
+
+
+! print color and bold/underline attributes
+XTerm*printAttributes: 2
+XTerm*printerCommand: cat > ~/xtermdump
+
+
+!fix alt key input
+xterm*eightBitInput: false
+xterm*altSendsEscape: true
+
+
+! Mouse selecting to copy, ctrl-v to paste
+! Ctrl p to print screen content to file
+XTerm*VT100.Translations: #override \
+Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+Shift <KeyPress> Insert: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+<BtnUp>: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+Ctrl <KeyPress> P: print() \n
+
+!-- Tango color scheme
+*xterm*color0: #2e3436
+*xterm*color1: #cc0000
+*xterm*color2: #4e9a06
+*xterm*color3: #c4a000
+*xterm*color4: #3465a4
+*xterm*color5: #75507b
+*xterm*color6: #0b939b
+*xterm*color7: #d3d7cf
+*xterm*color8: #555753
+*xterm*color9: #ef2929
+*xterm*color10: #8ae234
+*xterm*color11: #fce94f
+*xterm*color12: #729fcf
+*xterm*color13: #ad7fa8
+*xterm*color14: #00f5e9
+*xterm*color15: #eeeeec
