@@ -29,8 +29,8 @@ Plug 'posva/vim-vue'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 
 " fzf
-" Plug 'junegunn/fzf', { 'dir': '/usr/bin/fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 
 " Initialize plugin system
 call plug#end()
