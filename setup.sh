@@ -1,3 +1,6 @@
+# tools
+pacman -S feh
+pacman -S rofi
 
 # z.sh
 chmod +x ~/.archcfg/z.sh
@@ -15,8 +18,6 @@ pacman -S i3 i3blocks i3lock
 
 ## config
 ln -s ~/.archcfg/i3 ~/.config/i3
-
-#
 
 # nvm
 
@@ -36,3 +37,4 @@ pacman -S ranger
 
 ## config
 ln -s ~/.archcfg/ranger ~/.config/ranger
+
